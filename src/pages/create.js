@@ -1,7 +1,9 @@
 import React, { Component } from "react";
+import { useParams } from "react-router-dom";
 
-import Page from '../components/page/page';
-import SelectCard from '../components/select-card/select-card';
+import Page from "../components/page/page";
+import SelectCard from "../components/select-card/select-card";
+import CreateGolfer from "../components/create-golfer/create-golfer";
 
 class CreatePage extends Component {
   constructor(props) {
@@ -9,12 +11,20 @@ class CreatePage extends Component {
 
     this.state = {
       game: this.props.game,
-      mode: 'unset',
-    }
+      mode: "unset",
+    };
+  }
+
+  componentWillMount() {
+    
+  }
+
+  componentDidMount() {
+    console.log('Create Page Mounted', this);
   }
 
   cardClick = (mode) => {
-    this.setState({mode: mode.toLowerCase()});
+    this.setState({ mode: mode.toLowerCase() });
   };
 
   SelectMode = () => {
@@ -39,8 +49,7 @@ class CreatePage extends Component {
       case "golfer":
         return (
           <Page>
-            {/* <CreateGolfer golfers={this.props.golfers} /> */}
-            <div>Create Golfer Form!</div>
+            <CreateGolfer golfers={this.props.golfers} />
           </Page>
         );
       case "course":

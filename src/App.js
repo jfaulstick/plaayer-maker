@@ -1,52 +1,86 @@
-import React from 'react';
-import { BrowserRouter as Router, Switch, Route, Link, useParams } from 'react-router-dom';
+import React, { Component } from "react";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams,
+} from "react-router-dom";
 
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
-import FormControl from 'react-bootstrap/FormControl';
-import Navbar from 'react-bootstrap/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import FormControl from "react-bootstrap/FormControl";
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import NavDropdown from "react-bootstrap/NavDropdown";
 
-import CreatePage from './pages/create';
+import CreatePage from "./pages/create";
 
-import './App.scss';
+import "./App.scss";
 
-function App() {
-  return (
-    <Router>
-      <div className="App">
-        <Navbar bg="dark" expand="lg" variant='dark' className='fixed-top'>
-          <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="mr-auto">
-              <Link className='nav-link' to="/">Home</Link>
-              <Link className='nav-link' to="/about">About</Link>
-              <NavDropdown title="Create" id="basic-nav-dropdown">
-                <Link className='dropdown-item' to="/create/hmg">History Maker Golf</Link>
-                <Link className='dropdown-item' to="/create/hmb" disabled>
-                  History Maker Baseball
+class App extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      golfers: [],
+    };
+  }
+
+  componentWillMount() {
+    let storedGolfers = JSON.parse(localStorage.getItem("golfers"));
+
+    this.setState({ golfers: storedGolfers || [] });
+    console.log("storedGolfers");
+    console.log(storedGolfers);
+  }
+
+  componentDidMount() {
+    console.log("Golfers set to", this.state.golfers);
+  }
+
+  render() {
+    return (
+      <Router>
+        <div className="App">
+          <Navbar bg="dark" expand="lg" variant="dark" className="fixed-top">
+            <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <Link className="nav-link" to="/">
+                  Home
                 </Link>
-              </NavDropdown>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
+                <Link className="nav-link" to="/about">
+                  About
+                </Link>
+                <NavDropdown title="Create" id="basic-nav-dropdown">
+                  <Link className="dropdown-item" to="/create/hmg">
+                    History Maker Golf
+                  </Link>
+                  <Link className="dropdown-item" to="/create/hmb" disabled>
+                    History Maker Baseball
+                  </Link>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
 
-        <Switch>
-          <Route path='/create/:game'>
-            <Create />
-          </Route>
-          <Route path='/about'>
-            <About />
-          </Route>
-          <Route path='/'>
-            <Home />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
-  );
+          <Switch>
+            <Route path="/create/:game">
+              <CreatePage golfers={this.state.golfers} />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    );
+  }
 }
 
 function Home() {
@@ -55,13 +89,6 @@ function Home() {
 
 function About() {
   return <h2>About</h2>;
-}
-
-function Create() {
-  let { game } = useParams();
-  console.log(`Game is ${game}`);
-
-  return <CreatePage game={game} />;
 }
 
 export default App;
