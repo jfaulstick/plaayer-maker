@@ -1,0 +1,86 @@
+import React, { Component } from "react";
+
+import Page from '../components/page/page';
+import SelectCard from '../components/select-card/select-card';
+
+class CreatePage extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      game: this.props.game,
+      mode: 'unset',
+    }
+  }
+
+  cardClick = (mode) => {
+    this.setState({mode: mode.toLowerCase()});
+  };
+
+  SelectMode = () => {
+    return (
+      <Page>
+        {/* <SelectCard
+          type={"Course"}
+          imgUrl="/assets/img/pinflag.jpg"
+          clickEvent={this.cardClick}
+        /> */}
+        <SelectCard
+          type={"Golfer"}
+          imgUrl="/assets/img/golfer.png"
+          clickEvent={this.cardClick}
+        />
+      </Page>
+    );
+  };
+
+  render = () => {
+    switch (this.state.mode) {
+      case "golfer":
+        return (
+          <Page>
+            {/* <CreateGolfer golfers={this.props.golfers} /> */}
+            <div>Create Golfer Form!</div>
+          </Page>
+        );
+      case "course":
+        return (
+          <Page>
+            <div>Creating a Course!</div>
+          </Page>
+        );
+      case "unset":
+        return (
+          <Page>
+            {/* <SelectCard
+              type={"Course"}
+              imgUrl="/assets/img/pinflag.jpg"
+              clickEvent={this.cardClick}
+            /> */}
+            <SelectCard
+              type={"Golfer"}
+              imgUrl="/assets/img/golfer.png"
+              clickEvent={this.cardClick}
+            />
+          </Page>
+        );
+      default:
+        return (
+          <Page>
+            {/* <SelectCard
+              type={"Course"}
+              imgUrl="/assets/img/pinflag.jpg"
+              clickEvent={this.cardClick}
+            /> */}
+            <SelectCard
+              type={"Golfer"}
+              imgUrl="/assets/img/golfer.png"
+              clickEvent={this.cardClick}
+            />
+          </Page>
+        );
+    }
+  };
+}
+
+export default CreatePage;
