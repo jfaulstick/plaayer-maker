@@ -28,7 +28,6 @@ class MyStuffPage extends Component {
   }
 
   viewItem(item) {
-    console.log(`Clicked view on item`, item);
     this.setState({modalTarget: item});
     this.showModal();
   }
