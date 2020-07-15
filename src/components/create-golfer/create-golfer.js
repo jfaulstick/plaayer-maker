@@ -121,8 +121,8 @@ const CreateGolfer = (props) => {
   };
 
   return (
-    <div className="container-sm d-flex flex-column flex-sm-row justify-content-center align-items-center">
-      <div className="col-sm-8">
+    <div className="container-md d-flex flex-column flex-md-row justify-content-center align-items-center">
+      <div className="col-md-8">
         <form
           className="create-golfer-form card"
           onSubmit={handleSubmit(onSubmit)}
@@ -133,7 +133,7 @@ const CreateGolfer = (props) => {
             </div>
             <div className="row form-row">
               {/* register your input into the hook by invoking the "register" function */}
-              <div className="col-sm-4">
+              <div className="col-md-4">
                 <input
                   name="nameFirst"
                   className="form-control"
@@ -144,7 +144,7 @@ const CreateGolfer = (props) => {
                   <span className="text-danger">A name is required</span>
                 )}
               </div>
-              <div className="col-sm-4">
+              <div className="col-md-4">
                 <input
                   name="nameLast"
                   className="form-control"
@@ -155,7 +155,7 @@ const CreateGolfer = (props) => {
                   <span className="text-danger">A name is required</span>
                 )}
               </div>
-              <div className="col-sm-4">
+              <div className="col-md-4">
                 <input
                   name="tour"
                   className="form-control"
@@ -165,7 +165,7 @@ const CreateGolfer = (props) => {
               </div>
             </div>
             <div className="row form-row">
-              <div className="col-sm-6">
+              <div className="col-md-6">
                 <select
                   className="form-control form-control-sm"
                   name="tournamentNumber"
@@ -186,7 +186,7 @@ const CreateGolfer = (props) => {
                   </span>
                 )}
               </div>
-              <div className="col-sm-6">
+              <div className="col-md-6">
                 <select
                   className="form-control form-control-sm"
                   name="tournamentGrade"
@@ -207,7 +207,7 @@ const CreateGolfer = (props) => {
               <label className="skills-label">Skills</label>
             </div>
             <div className="row mt-1 d-flex justify-content-center">
-              <div className="col-sm-4 text-left">
+              <div className="col-md-4 col-sm-12 text-left">
                 <div className="row text-left">
                   <div className="skill-select-label">Puny</div>
                   <div className="skill-select">
@@ -335,7 +335,7 @@ const CreateGolfer = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-4 text-left">
+              <div className="col-md-4 col-sm-12 text-left">
                 <div className="row text-left">
                   <div className="skill-select-label">Hero</div>
                   <div className="skill-select">
@@ -449,7 +449,7 @@ const CreateGolfer = (props) => {
                   </div>
                 </div>
               </div>
-              <div className="col-sm-4 text-left">
+              <div className="col-md-4 col-sm-12 text-left">
                 <div className="row text-left">
                   <div className="skill-select-label">Sandy</div>
                   <div className="skill-select">
@@ -571,7 +571,7 @@ const CreateGolfer = (props) => {
           </div>
         </form>
       </div>
-      <div className="col-sm-4">
+      <div className="col-md-4">
         <CardGolfer golfer={golfer} />
       </div>
     </div>

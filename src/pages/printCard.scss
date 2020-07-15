@@ -1,0 +1,26 @@
+.padding-top-noprint {
+  padding-top: 5vh;
+}
+
+.print-row {
+  justify-content: center;
+}
+
+@media print {
+  @page {
+    size: landscape;
+  }
+
+  .print-page {
+    height: 215.9mm;
+    width: 279.4mm;
+  }
+
+  .padding-top-noprint {
+    padding-top: 0;
+  }
+
+  .print-row {
+    justify-content: start;
+  }
+}

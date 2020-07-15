@@ -1,25 +1,25 @@
 import React from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 
-import './select-card.scss';
+import "./select-card.scss";
 
 const SelectCard = (props) => {
   const handleClick = (e) => {
     e.preventDefault();
-    props.clickEvent(props.type)
-  }
+    props.clickEvent(props.type);
+  };
 
   return (
-    <div
-      className="card select-card"
-      style={{ width: "18rem" }}
-      onClick={handleClick}
-    >
-      <img
-        src={props.imgUrl}
-        className="card-img-top img-fluid"
-        alt="Golfer"
-      />
-    </div>
+    <Card className="">
+      <Card.Img src={props.imgUrl} variant="top" alt="Golfer" />
+
+      <Card.Body className='text-center'>
+        <Button variant="primary" onClick={handleClick}>
+          Create Golfer
+        </Button>
+      </Card.Body>
+    </Card>
   );
 };
 

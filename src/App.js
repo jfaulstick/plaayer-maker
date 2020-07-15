@@ -16,6 +16,7 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 import CreatePage from "./pages/create";
 import MyStuffPage from "./pages/mystuff";
+import PrintGolfers from './pages/printCard';
 
 import "./App.scss";
 
@@ -94,6 +95,9 @@ class App extends Component {
             </Route>
             <Route path="/mystuff/:game">
               <MyStuffPage golfers={this.state.golfers} deleteGolfer={this.deleteGolfer}/>
+            </Route>
+            <Route path='/print/:golfers'>
+              <PrintGolfers location={this.props.location} />
             </Route>
             <Route path="/about">
               <About />
