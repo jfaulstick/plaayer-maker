@@ -89,8 +89,8 @@ const CreateGolfer = (props) => {
   return (
     <div className="container-sm d-flex flex-column flex-sm-row justify-content-center align-items-center">
       <div className="col-sm-8">
-        <form className='create-golfer-form' onSubmit={handleSubmit(onSubmit)}>
-          <div className="form-group">
+        <form className='create-golfer-form card' onSubmit={handleSubmit(onSubmit)}>
+          <div className="form-group card-body">
             <div className="row mt-2 d-flex justify-content-center">
               <label className="skills-label">Information</label>
             </div>

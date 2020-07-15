@@ -15,6 +15,7 @@ import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
 
 import CreatePage from "./pages/create";
+import MyStuffPage from "./pages/mystuff";
 
 import "./App.scss";
 
@@ -43,7 +44,7 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Navbar bg="dark" expand="lg" variant="dark" className="fixed-top">
+          <Navbar bg="dark" expand="lg" variant="dark">
             <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
@@ -51,16 +52,21 @@ class App extends Component {
                 <Link className="nav-link" to="/">
                   Home
                 </Link>
-                <Link className="nav-link" to="/about">
-                  About
-                </Link>
                 <NavDropdown title="Create" id="basic-nav-dropdown">
                   <Link className="dropdown-item" to="/create/hmg">
                     History Maker Golf
                   </Link>
-                  <Link className="dropdown-item" to="/create/hmb" disabled>
+                  {/* <Link className="dropdown-item" to="/create/hmb" disabled>
                     History Maker Baseball
+                  </Link> */}
+                </NavDropdown>
+                <NavDropdown title="My Stuff" id="basic-nav-dropdown">
+                  <Link className="dropdown-item" to="/mystuff/hmg">
+                    History Maker Golf
                   </Link>
+                  {/* <Link className="dropdown-item" to="/create/hmb" disabled>
+                    History Maker Baseball
+                  </Link> */}
                 </NavDropdown>
               </Nav>
             </Navbar.Collapse>
@@ -69,6 +75,9 @@ class App extends Component {
           <Switch>
             <Route path="/create/:game">
               <CreatePage golfers={this.state.golfers} />
+            </Route>
+            <Route path="/mystuff/:game">
+              <MyStuffPage golfers={this.state.golfers} />
             </Route>
             <Route path="/about">
               <About />
