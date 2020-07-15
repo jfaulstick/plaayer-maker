@@ -26,18 +26,34 @@ class App extends Component {
     this.state = {
       golfers: [],
     };
+
+    this.deleteGolfer = this.deleteGolfer.bind(this);
   }
 
   componentWillMount() {
-    let storedGolfers = JSON.parse(localStorage.getItem("golfers"));
+    this.fetchGolfers();
+  }
 
+  componentDidMount() {
+    console.log("Golfers set to", this.state.golfers);
+  }
+
+  fetchGolfers() {
+    let storedGolfers = JSON.parse(localStorage.getItem("golfers"));
     this.setState({ golfers: storedGolfers || [] });
     console.log("storedGolfers");
     console.log(storedGolfers);
   }
 
-  componentDidMount() {
-    console.log("Golfers set to", this.state.golfers);
+  deleteGolfer(item) {
+    const index = this.state.golfers.indexOf(item);
+    console.log(`Clicked deleteItem on item at index ${index}`);
+    const golfers = this.state.golfers;
+    const newGolfers = golfers.splice(index, 1);
+    console.log(`Remaining golfers`, golfers);
+    this.setState({golfers: golfers});
+    console.log(`this.state.golfers`, this.state.golfers);
+    localStorage.setItem('golfers', JSON.stringify(this.state.golfers));
   }
 
   render() {
@@ -77,7 +93,7 @@ class App extends Component {
               <CreatePage golfers={this.state.golfers} />
             </Route>
             <Route path="/mystuff/:game">
-              <MyStuffPage golfers={this.state.golfers} />
+              <MyStuffPage golfers={this.state.golfers} deleteGolfer={this.deleteGolfer}/>
             </Route>
             <Route path="/about">
               <About />

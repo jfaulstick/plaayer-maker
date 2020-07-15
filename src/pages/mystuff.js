@@ -33,7 +33,40 @@ class MyStuffPage extends Component {
   }
 
   deleteItem(item) {
-    console.log(`Clicked delete on item`, item);
+    
+  }
+
+  golferTable() {
+    if (this.props.golfers) {
+      return (
+        this.props.golfers.map((golfer, index) => {
+          return (
+            <tr key={index}>
+              <th scope="row">{index}</th>
+              <td>{golfer.nameFirst}</td>
+              <td>{golfer.nameLast}</td>
+              <td>{golfer.tour}</td>
+              <td>{`${golfer.tournamentNumber}-${golfer.tournamentGrade}`}</td>
+              <td>
+                <FontAwesomeIcon
+                  className="icon-button"
+                  icon={faEye}
+                  onClick={() => this.viewItem(golfer)}
+                />
+              </td>
+              <td>
+                <FontAwesomeIcon
+                  className="icon-button"
+                  icon={faTrashAlt}
+                  onClick={() => this.props.deleteGolfer(golfer)}
+                />
+              </td>
+            </tr>
+          );
+        })
+      )
+    }
+    return <div>No golfers found!</div>
   }
 
   render() {
@@ -47,9 +80,6 @@ class MyStuffPage extends Component {
           <Modal.Footer className='d-flex justify-content-center'>
             <Button variant="secondary" onClick={this.closeModal}>
               Close
-            </Button>
-            <Button variant="primary" onClick={this.closeModal}>
-              Save Changes
             </Button>
           </Modal.Footer>
         </Modal>
@@ -66,31 +96,7 @@ class MyStuffPage extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.state.golfers.map((golfer, index) => {
-              return (
-                <tr key={index}>
-                  <th scope="row">{index}</th>
-                  <td>{golfer.nameFirst}</td>
-                  <td>{golfer.nameLast}</td>
-                  <td>{golfer.tour}</td>
-                  <td>{`${golfer.tournamentNumber}-${golfer.tournamentGrade}`}</td>
-                  <td>
-                    <FontAwesomeIcon
-                      className="icon-button"
-                      icon={faEye}
-                      onClick={() => this.viewItem(golfer)}
-                    />
-                  </td>
-                  <td>
-                    <FontAwesomeIcon
-                      className="icon-button"
-                      icon={faTrashAlt}
-                      onClick={() => this.deleteItem(golfer)}
-                    />
-                  </td>
-                </tr>
-              );
-            })}
+            {this.golferTable()}
           </tbody>
         </table>
       </div>
