@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 
 import CardGolfer from "../card-golfer/card-golfer";
 
-import './create-golfer.scss';
+import "./create-golfer.scss";
 
 const CreateGolfer = (props) => {
   const [golfer2, setGolfer] = useState({
@@ -37,16 +37,16 @@ const CreateGolfer = (props) => {
       dynamic: "no",
       gilded: "no",
     },
-    tournamentNumber: 7,
+    tournamentNumber: 8,
     tournamentGrade: "C",
   });
 
-  const { register, handleSubmit, watch, errors } = useForm();
+  const { register, handleSubmit, watch, setValue, errors } = useForm();
 
   const golfer = {
     nameFirst: watch("nameFirst", "John"),
     nameLast: watch("nameLast", "Doe"),
-    tour: watch("tour", "2020 Amateurs"),
+    tour: watch("tour", "2020's Amateurs"),
     skills: {
       puny: watch("skills.puny", "no"),
       bomber: watch("skills.bomber", "no"),
@@ -78,18 +78,55 @@ const CreateGolfer = (props) => {
     tournamentGrade: watch("tournamentGrade", "C"),
   };
 
+  const resetForm = () => {
+    setValue('nameFirst', 'John');
+    setValue('nameLast', 'Doe');
+    setValue('tour', "2020's Amateurs");
+    setValue('tournamentNumber', 8);
+    setValue('tournamentGrade', "C");
+    setValue('skills', {
+      puny: "no",
+      bomber: "no",
+      shaper: "no",
+      scatter: "no",
+      legend: "no",
+      king: "no",
+      yeoman: "no",
+      duffer: "no",
+      champion: "no",
+      hero: "no",
+      utility: "no",
+      hacker: "no",
+      laser: "no",
+      soft: "no",
+      stone: "no",
+      master: "no",
+      workman: "no",
+      sandy: "no",
+      chunky: "no",
+      gold: "no",
+      rust: "no",
+      icon: "no",
+      prospect: "no",
+      dynamic: "no",
+      gilded: "no",
+    });
+  };
+
   const onSubmit = (data) => {
-    console.log(data);
     setGolfer(data);
     props.golfers.push(data);
     localStorage.setItem("golfers", JSON.stringify(props.golfers));
-    console.log("Golfers is now", props.golfers);
+    resetForm();
   };
 
   return (
     <div className="container-sm d-flex flex-column flex-sm-row justify-content-center align-items-center">
       <div className="col-sm-8">
-        <form className='create-golfer-form card' onSubmit={handleSubmit(onSubmit)}>
+        <form
+          className="create-golfer-form card"
+          onSubmit={handleSubmit(onSubmit)}
+        >
           <div className="form-group card-body">
             <div className="row mt-2 d-flex justify-content-center">
               <label className="skills-label">Information</label>
