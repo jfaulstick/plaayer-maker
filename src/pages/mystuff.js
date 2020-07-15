@@ -61,6 +61,7 @@ class MyStuffPage extends Component {
                 onClick={() => this.props.deleteGolfer(golfer)}
               />
             </td>
+            <td></td>
           </tr>
         );
       });
@@ -70,7 +71,7 @@ class MyStuffPage extends Component {
 
   render() {
     return (
-      <div className="page container-fluid p-0">
+      <div className="page container p-0">
         <Modal
           size="sm"
           show={this.state.showModal}
@@ -91,23 +92,29 @@ class MyStuffPage extends Component {
             </Button>
           </Modal.Footer>
         </Modal>
-        <table className="table table-striped">
+        <table className="table table-sm table-striped">
           <thead className="thead-light">
             <tr>
-              <th scope="col">#</th>
+              <th scope="col" style={{width: '4rem'}}>#</th>
               <th scope="col">First</th>
               <th scope="col">Last</th>
               <th scope="col">Tour</th>
-              <th scope="col">Grade</th>
-              <th scope="col"></th>
-              <th scope="col"></th>
+              <th scope="col" style={{width: '4rem'}}>Grade</th>
+              <th scope="col" style={{width: '4rem'}}>
+                
+              </th>
+              <th scope="col" style={{width: '4rem'}}></th>
+              <th scope='col' style={{width: '6rem'}}><Link
+                  to={{ pathname: "/print/golfers", items: this.props.golfers }}
+                >
+                  <Button variant="primary" size="sm">
+                    Print
+                  </Button>
+                </Link></th>
             </tr>
           </thead>
           <tbody>{this.golferTable()}</tbody>
         </table>
-        <Link to={{pathname: "/print/golfers", items: this.props.golfers}}>
-          <Button variant="primary">Print</Button>
-        </Link>
       </div>
     );
   }
