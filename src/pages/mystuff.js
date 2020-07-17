@@ -71,7 +71,7 @@ class MyStuffPage extends Component {
 
   render() {
     return (
-      <div className="page container p-0">
+      <div className="page container-fluid p-0">
         <Modal
           size="sm"
           show={this.state.showModal}
