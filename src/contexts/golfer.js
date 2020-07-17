@@ -1,5 +1,6 @@
 import React from 'react';
 
 export const GolferContext = React.createContext({
-    golfers: []
+    golfers: [],
+    setGolfers: () => {},
 });

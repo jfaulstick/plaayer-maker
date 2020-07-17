@@ -43,6 +43,7 @@ class App extends Component {
 
   setGolfers(golfers) {
     this.setState({ golfers: golfers });
+    localStorage.setItem("golfers", JSON.stringify(golfers));
   }
 
   fetchGolfers() {
@@ -66,7 +67,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <GolferContext.Provider value={this.state.golfers}>
+        <GolferContext.Provider value={this.state.golfers, this.setGolfers}>
           <div className="App">
             <Navbar bg="dark" expand="lg" variant="dark">
               <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
@@ -98,7 +99,7 @@ class App extends Component {
 
             <Switch>
               <Route path="/create/:game">
-                <CreatePage />
+                <CreatePage golfers={this.state.golfers} />
               </Route>
               <Route path="/mystuff/:game">
                 <MyStuffPage

@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useForm } from "react-hook-form";
 
 import CardGolfer from "../card-golfer/card-golfer";
+import { GolferContext } from "../../contexts/golfer";
 
 import "./create-golfer.scss";
 
 const CreateGolfer = (props) => {
+  const { golfers, setGolfers } = useContext(GolferContext);
+
+  console.log(`golfers from context`, golfers);
+
   const [golfer2, setGolfer] = useState({
     nameFirst: "",
     nameLast: "",
@@ -79,12 +84,12 @@ const CreateGolfer = (props) => {
   };
 
   const resetForm = () => {
-    setValue('nameFirst', 'John');
-    setValue('nameLast', 'Doe');
-    setValue('tour', "2020's Amateurs");
-    setValue('tournamentNumber', 8);
-    setValue('tournamentGrade', "C");
-    setValue('skills', {
+    setValue("nameFirst", "John");
+    setValue("nameLast", "Doe");
+    setValue("tour", "2020's Amateurs");
+    setValue("tournamentNumber", 8);
+    setValue("tournamentGrade", "C");
+    setValue("skills", {
       puny: "no",
       bomber: "no",
       shaper: "no",
@@ -114,9 +119,9 @@ const CreateGolfer = (props) => {
   };
 
   const onSubmit = (data) => {
+    console.log('submitted with data', data);
     setGolfer(data);
-    props.golfers.push(data);
-    localStorage.setItem("golfers", JSON.stringify(props.golfers));
+    setGolfers(data, ...golfers);
     resetForm();
   };
 

@@ -74,7 +74,7 @@ class MyStuffPage extends Component {
   render() {
     return (
       <GolferContext.Consumer>
-        {(golfers) => (
+        {({golfers, setGolfers}) => (
           <div className="page container p-0">
             <Modal
               size="sm"
@@ -114,7 +114,7 @@ class MyStuffPage extends Component {
                     <Link
                       to={{
                         pathname: "/print/golfers",
-                        items: this.props.golfers,
+                        items: golfers,
                       }}
                     >
                       <Button variant="primary" size="sm">
