@@ -5,8 +5,6 @@ import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt, faEye } from "@fortawesome/free-solid-svg-icons";
 
-import { GolferContext } from "../contexts/golfer";
-
 import CardGolfer from "../components/card-golfer/card-golfer";
 
 class MyStuffPage extends Component {
@@ -73,62 +71,58 @@ class MyStuffPage extends Component {
 
   render() {
     return (
-      <GolferContext.Consumer>
-        {(golfers) => (
-          <div className="page container p-0">
-            <Modal
-              size="sm"
-              show={this.state.showModal}
-              onHide={this.closeModal}
-              centered
-            >
-              <Modal.Header closeButton>
-                <Modal.Title className="d-flex justify-content-center">
-                  Player Card
-                </Modal.Title>
-              </Modal.Header>
-              <Modal.Body className="d-flex justify-content-center">
-                <CardGolfer golfer={this.state.modalTarget} />
-              </Modal.Body>
-              <Modal.Footer className="d-flex justify-content-center">
-                <Button variant="secondary" onClick={this.closeModal}>
-                  Close
-                </Button>
-              </Modal.Footer>
-            </Modal>
-            <table className="table table-sm table-striped">
-              <thead className="thead-light">
-                <tr>
-                  <th scope="col" style={{ width: "4rem" }}>
-                    #
-                  </th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Tour</th>
-                  <th scope="col" style={{ width: "4rem" }}>
-                    Grade
-                  </th>
-                  <th scope="col" style={{ width: "4rem" }}></th>
-                  <th scope="col" style={{ width: "4rem" }}></th>
-                  <th scope="col" style={{ width: "6rem" }}>
-                    <Link
-                      to={{
-                        pathname: "/print/golfers",
-                        items: this.props.golfers,
-                      }}
-                    >
-                      <Button variant="primary" size="sm">
-                        Print
-                      </Button>
-                    </Link>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>{this.golferTable(golfers)}</tbody>
-            </table>
-          </div>
-        )}
-      </GolferContext.Consumer>
+      <div className="page container p-0">
+        <Modal
+          size="sm"
+          show={this.state.showModal}
+          onHide={this.closeModal}
+          centered
+        >
+          <Modal.Header closeButton>
+            <Modal.Title className="d-flex justify-content-center">
+              Player Card
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body className="d-flex justify-content-center">
+            <CardGolfer golfer={this.state.modalTarget} />
+          </Modal.Body>
+          <Modal.Footer className="d-flex justify-content-center">
+            <Button variant="secondary" onClick={this.closeModal}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <table className="table table-sm table-striped">
+          <thead className="thead-light">
+            <tr>
+              <th scope="col" style={{ width: "4rem" }}>
+                #
+              </th>
+              <th scope="col">First</th>
+              <th scope="col">Last</th>
+              <th scope="col">Tour</th>
+              <th scope="col" style={{ width: "4rem" }}>
+                Grade
+              </th>
+              <th scope="col" style={{ width: "4rem" }}></th>
+              <th scope="col" style={{ width: "4rem" }}></th>
+              <th scope="col" style={{ width: "6rem" }}>
+                <Link
+                  to={{
+                    pathname: "/print/golfers",
+                    items: this.props.golfers,
+                  }}
+                >
+                  <Button variant="primary" size="sm">
+                    Print
+                  </Button>
+                </Link>
+              </th>
+            </tr>
+          </thead>
+          <tbody>{this.golferTable(this.props.golfers)}</tbody>
+        </table>
+      </div>
     );
   }
 }

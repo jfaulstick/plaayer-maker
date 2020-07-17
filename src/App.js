@@ -18,8 +18,6 @@ import CreatePage from "./pages/create";
 import MyStuffPage from "./pages/mystuff";
 import PrintGolfers from "./pages/printCard";
 
-import { GolferContext } from "./contexts/golfer";
-
 import "./App.scss";
 
 class App extends Component {
@@ -66,7 +64,7 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <GolferContext.Provider value={this.state.golfers}>
+        
           <div className="App">
             <Navbar bg="dark" expand="lg" variant="dark">
               <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
@@ -98,11 +96,11 @@ class App extends Component {
 
             <Switch>
               <Route path="/create/:game">
-                <CreatePage />
+                <CreatePage golfers={this.state.golfers} />
               </Route>
               <Route path="/mystuff/:game">
                 <MyStuffPage
-                  deleteGolfer={this.deleteGolfer}
+                  golfers={this.state.golfers}  deleteGolfer={this.deleteGolfer}
                 />
               </Route>
               <Route path="/print/:golfers">
@@ -116,7 +114,7 @@ class App extends Component {
               </Route>
             </Switch>
           </div>
-        </GolferContext.Provider>
+       
       </Router>
     );
   }

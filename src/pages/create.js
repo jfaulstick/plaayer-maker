@@ -37,7 +37,7 @@ class CreatePage extends Component {
         /> */}
         <SelectCard
           type={"Golfer"}
-          imgUrl="/assets/img/golfer.png"
+          imgUrl="./assets/img/golfer.png"
           clickEvent={this.cardClick}
         />
       </Page>
@@ -49,7 +49,7 @@ class CreatePage extends Component {
       case "golfer":
         return (
           <Page>
-            <CreateGolfer />
+            <CreateGolfer golfers={this.props.golfers} />
           </Page>
         );
       case "course":
@@ -68,7 +68,7 @@ class CreatePage extends Component {
             /> */}
             <SelectCard
               type={"Golfer"}
-              imgUrl="/assets/img/golfer.png"
+              imgUrl="./assets/img/golfer.png"
               clickEvent={this.cardClick}
             />
           </Page>
@@ -83,7 +83,7 @@ class CreatePage extends Component {
             /> */}
             <SelectCard
               type={"Golfer"}
-              imgUrl="/assets/img/golfer.png"
+              imgUrl="./assets/img/golfer.png"
               clickEvent={this.cardClick}
             />
           </Page>

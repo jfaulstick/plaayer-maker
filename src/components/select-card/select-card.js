@@ -2,6 +2,8 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 
+import GolferImg from './golfer.png';
+
 import "./select-card.scss";
 
 const SelectCard = (props) => {
@@ -12,7 +14,7 @@ const SelectCard = (props) => {
 
   return (
     <Card className="">
-      <Card.Img src={props.imgUrl} variant="top" alt="Golfer" />
+      <Card.Img src={GolferImg} variant="top" alt="Golfer" />
 
       <Card.Body className='text-center'>
         <Button variant="primary" onClick={handleClick}>
