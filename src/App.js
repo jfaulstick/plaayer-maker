@@ -16,7 +16,9 @@ import NavDropdown from "react-bootstrap/NavDropdown";
 
 import CreatePage from "./pages/create";
 import MyStuffPage from "./pages/mystuff";
-import PrintGolfers from './pages/printCard';
+import PrintGolfers from "./pages/printCard";
+
+import { GolferContext } from "./contexts/golfer";
 
 import "./App.scss";
 
@@ -39,9 +41,13 @@ class App extends Component {
     console.log("Golfers set to", this.state.golfers);
   }
 
+  setGolfers(golfers) {
+    this.setState({ golfers: golfers });
+  }
+
   fetchGolfers() {
     let storedGolfers = JSON.parse(localStorage.getItem("golfers"));
-    this.setState({ golfers: storedGolfers || [] });
+    this.setGolfers(storedGolfers);
     console.log("storedGolfers");
     console.log(storedGolfers);
   }
@@ -52,61 +58,65 @@ class App extends Component {
     const golfers = this.state.golfers;
     const newGolfers = golfers.splice(index, 1);
     console.log(`Remaining golfers`, golfers);
-    this.setState({golfers: golfers});
+    this.setState({ golfers: golfers });
     console.log(`this.state.golfers`, this.state.golfers);
-    localStorage.setItem('golfers', JSON.stringify(this.state.golfers));
+    localStorage.setItem("golfers", JSON.stringify(this.state.golfers));
   }
 
   render() {
     return (
       <Router>
-        <div className="App">
-          <Navbar bg="dark" expand="lg" variant="dark">
-            <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Link className="nav-link" to="/">
-                  Home
-                </Link>
-                <NavDropdown title="Create" id="basic-nav-dropdown">
-                  <Link className="dropdown-item" to="/create/hmg">
-                    History Maker Golf
+        <GolferContext.Provider value={this.state.golfers}>
+          <div className="App">
+            <Navbar bg="dark" expand="lg" variant="dark">
+              <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+              <Navbar.Collapse id="basic-navbar-nav">
+                <Nav className="mr-auto">
+                  <Link className="nav-link" to="/">
+                    Home
                   </Link>
-                  {/* <Link className="dropdown-item" to="/create/hmb" disabled>
+                  <NavDropdown title="Create" id="basic-nav-dropdown">
+                    <Link className="dropdown-item" to="/create/hmg">
+                      History Maker Golf
+                    </Link>
+                    {/* <Link className="dropdown-item" to="/create/hmb" disabled>
                     History Maker Baseball
                   </Link> */}
-                </NavDropdown>
-                <NavDropdown title="My Stuff" id="basic-nav-dropdown">
-                  <Link className="dropdown-item" to="/mystuff/hmg">
-                    History Maker Golf
-                  </Link>
-                  {/* <Link className="dropdown-item" to="/create/hmb" disabled>
+                  </NavDropdown>
+                  <NavDropdown title="My Stuff" id="basic-nav-dropdown">
+                    <Link className="dropdown-item" to="/mystuff/hmg">
+                      History Maker Golf
+                    </Link>
+                    {/* <Link className="dropdown-item" to="/create/hmb" disabled>
                     History Maker Baseball
                   </Link> */}
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+                  </NavDropdown>
+                </Nav>
+              </Navbar.Collapse>
+            </Navbar>
 
-          <Switch>
-            <Route path="/create/:game">
-              <CreatePage golfers={this.state.golfers} />
-            </Route>
-            <Route path="/mystuff/:game">
-              <MyStuffPage golfers={this.state.golfers} deleteGolfer={this.deleteGolfer}/>
-            </Route>
-            <Route path='/print/:golfers'>
-              <PrintGolfers location={this.props.location} />
-            </Route>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </div>
+            <Switch>
+              <Route path="/create/:game">
+                <CreatePage />
+              </Route>
+              <Route path="/mystuff/:game">
+                <MyStuffPage
+                  deleteGolfer={this.deleteGolfer}
+                />
+              </Route>
+              <Route path="/print/:golfers">
+                <PrintGolfers location={this.props.location} />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/">
+                <Home />
+              </Route>
+            </Switch>
+          </div>
+        </GolferContext.Provider>
       </Router>
     );
   }

@@ -49,7 +49,7 @@ class CreatePage extends Component {
       case "golfer":
         return (
           <Page>
-            <CreateGolfer golfers={this.props.golfers} />
+            <CreateGolfer />
           </Page>
         );
       case "course":
