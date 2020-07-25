@@ -114,7 +114,7 @@ class MyStuffPage extends Component {
                   }}
                 >
                   <Button variant="primary" size="sm">
-                    Print
+                    Cards
                   </Button>
                 </Link>
               </th>

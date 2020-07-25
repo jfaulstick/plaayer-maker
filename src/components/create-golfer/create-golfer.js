@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 
 import CardGolfer from "../card-golfer/card-golfer";
@@ -6,41 +6,6 @@ import CardGolfer from "../card-golfer/card-golfer";
 import "./create-golfer.scss";
 
 const CreateGolfer = (props) => {
-  const [golfer2, setGolfer] = useState({
-    nameFirst: "",
-    nameLast: "",
-    tour: "",
-    skills: {
-      puny: "no",
-      bomber: "no",
-      shaper: "no",
-      scatter: "no",
-      legend: "no",
-      king: "no",
-      yeoman: "no",
-      duffer: "no",
-      champion: "no",
-      hero: "no",
-      utility: "no",
-      hacker: "no",
-      laser: "no",
-      soft: "no",
-      stone: "no",
-      master: "no",
-      workman: "no",
-      sandy: "no",
-      chunky: "no",
-      gold: "no",
-      rust: "no",
-      icon: "no",
-      prospect: "no",
-      dynamic: "no",
-      gilded: "no",
-    },
-    tournamentNumber: 8,
-    tournamentGrade: "C",
-  });
-
   const { register, handleSubmit, watch, setValue, errors } = useForm();
 
   const golfer = {
@@ -79,12 +44,12 @@ const CreateGolfer = (props) => {
   };
 
   const resetForm = () => {
-    setValue('nameFirst', 'John');
-    setValue('nameLast', 'Doe');
-    setValue('tour', "2020's Amateurs");
-    setValue('tournamentNumber', 8);
-    setValue('tournamentGrade', "C");
-    setValue('skills', {
+    setValue("nameFirst", "John");
+    setValue("nameLast", "Doe");
+    setValue("tour", "2020's Amateurs");
+    setValue("tournamentNumber", 8);
+    setValue("tournamentGrade", "C");
+    setValue("skills", {
       puny: "no",
       bomber: "no",
       shaper: "no",
@@ -114,10 +79,11 @@ const CreateGolfer = (props) => {
   };
 
   const onSubmit = (data) => {
-    setGolfer(data);
     props.golfers.push(data);
     localStorage.setItem("golfers", JSON.stringify(props.golfers));
     resetForm();
+    console.log(props);
+    props.showAlert('success', `New golfer ${data.nameFirst} ${data.nameLast} saved to local storage.`);
   };
 
   return (
@@ -141,7 +107,7 @@ const CreateGolfer = (props) => {
                   ref={register({ required: true })}
                 />
                 {errors.nameFirst && (
-                  <span className="text-danger">A name is required</span>
+                  <span className="text-danger">A first name is required</span>
                 )}
               </div>
               <div className="col-md-4">
@@ -152,7 +118,7 @@ const CreateGolfer = (props) => {
                   ref={register({ required: true })}
                 />
                 {errors.nameFirst && (
-                  <span className="text-danger">A name is required</span>
+                  <span className="text-danger">A last name is required</span>
                 )}
               </div>
               <div className="col-md-4">

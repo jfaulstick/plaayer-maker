@@ -1,18 +1,10 @@
 import React, { Component } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import FormControl from "react-bootstrap/FormControl";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import NavDropdown from "react-bootstrap/NavDropdown";
+import AlertBox from "./components/alert-box/alertBox";
 
 import CreatePage from "./pages/create";
 import MyStuffPage from "./pages/mystuff";
@@ -26,9 +18,16 @@ class App extends Component {
 
     this.state = {
       golfers: [],
+      showAlert: false,
+      alert: {
+        variant: "",
+        message: "",
+      },
     };
 
     this.deleteGolfer = this.deleteGolfer.bind(this);
+    this.showAlert = this.showAlert.bind(this);
+    this.closeAlert = this.closeAlert.bind(this);
   }
 
   componentWillMount() {
@@ -37,6 +36,17 @@ class App extends Component {
 
   componentDidMount() {
     console.log("Golfers set to", this.state.golfers);
+  }
+
+  showAlert(variant, message) {
+    this.setState({
+      alert: { variant: variant, message: message },
+      showAlert: true,
+    });
+  }
+
+  closeAlert() {
+    this.setState({ showAlert: false });
   }
 
   setGolfers(golfers) {
@@ -54,7 +64,7 @@ class App extends Component {
     const index = this.state.golfers.indexOf(item);
     console.log(`Clicked deleteItem on item at index ${index}`);
     const golfers = this.state.golfers;
-    const newGolfers = golfers.splice(index, 1);
+    golfers.splice(index, 1);
     console.log(`Remaining golfers`, golfers);
     this.setState({ golfers: golfers });
     console.log(`this.state.golfers`, this.state.golfers);
@@ -64,57 +74,67 @@ class App extends Component {
   render() {
     return (
       <Router>
-        
-          <div className="App">
-            <Navbar bg="dark" expand="lg" variant="dark">
-              <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
-              <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="mr-auto">
-                  <Link className="nav-link" to="/">
-                    Home
+        <div className="App">
+          <Navbar bg="dark" expand="lg" variant="dark">
+            <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
+            <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            <Navbar.Collapse id="basic-navbar-nav">
+              <Nav className="mr-auto">
+                <Link className="nav-link" to="/">
+                  Home
+                </Link>
+                <NavDropdown title="Create" id="basic-nav-dropdown">
+                  <Link className="dropdown-item" to="/create/hmg">
+                    History Maker Golf
                   </Link>
-                  <NavDropdown title="Create" id="basic-nav-dropdown">
-                    <Link className="dropdown-item" to="/create/hmg">
-                      History Maker Golf
-                    </Link>
-                    {/* <Link className="dropdown-item" to="/create/hmb" disabled>
+                  {/* <Link className="dropdown-item" to="/create/hmb" disabled>
                     History Maker Baseball
                   </Link> */}
-                  </NavDropdown>
-                  <NavDropdown title="My Stuff" id="basic-nav-dropdown">
-                    <Link className="dropdown-item" to="/mystuff/hmg">
-                      History Maker Golf
-                    </Link>
-                    {/* <Link className="dropdown-item" to="/create/hmb" disabled>
+                </NavDropdown>
+                <NavDropdown title="My Stuff" id="basic-nav-dropdown">
+                  <Link className="dropdown-item" to="/mystuff/hmg">
+                    History Maker Golf
+                  </Link>
+                  {/* <Link className="dropdown-item" to="/create/hmb" disabled>
                     History Maker Baseball
                   </Link> */}
-                  </NavDropdown>
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
-
-            <Switch>
-              <Route path="/create/:game">
-                <CreatePage golfers={this.state.golfers} />
-              </Route>
-              <Route path="/mystuff/:game">
-                <MyStuffPage
-                  golfers={this.state.golfers}  deleteGolfer={this.deleteGolfer}
-                />
-              </Route>
-              <Route path="/print/:golfers">
-                <PrintGolfers location={this.props.location} />
-              </Route>
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
+                </NavDropdown>
+              </Nav>
+            </Navbar.Collapse>
+          </Navbar>
+          <div className="d-flex justify-content-center">
+            <AlertBox
+              alert={this.state.alert}
+              show={this.state.showAlert}
+              closeAlert={this.closeAlert}
+            />
           </div>
-       
+
+          <Switch>
+            <Route path="/create/:game">
+              <CreatePage
+                golfers={this.state.golfers}
+                showAlert={this.showAlert}
+              />
+            </Route>
+            <Route path="/mystuff/:game">
+              <MyStuffPage
+                golfers={this.state.golfers}
+                deleteGolfer={this.deleteGolfer}
+                showAlert={this.showAlert}
+              />
+            </Route>
+            <Route path="/print/:golfers">
+              <PrintGolfers location={this.props.location} />
+            </Route>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
       </Router>
     );
   }

@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { useParams } from "react-router-dom";
 
 import Page from "../components/page/page";
 import SelectCard from "../components/select-card/select-card";
@@ -49,7 +48,7 @@ class CreatePage extends Component {
       case "golfer":
         return (
           <Page>
-            <CreateGolfer golfers={this.props.golfers} />
+            <CreateGolfer golfers={this.props.golfers} showAlert={this.props.showAlert}/>
           </Page>
         );
       case "course":
