@@ -31,6 +31,10 @@ class PrintGolfers extends Component {
     }
   }
 
+  componentDidMount() {
+    window.print();
+  }
+
   renderPages = () => {
     if (this.props.location && this.props.location.items) {
       const pages = [];

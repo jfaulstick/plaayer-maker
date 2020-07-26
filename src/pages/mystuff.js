@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { MDBDataTable } from "mdbreact";
+import { MDBBtn } from "mdbreact";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -123,9 +123,9 @@ class MyStuffPage extends Component {
             <CardGolfer golfer={this.state.modalTarget} />
           </Modal.Body>
           <Modal.Footer className="d-flex justify-content-center">
-            <Button variant="secondary" onClick={this.closeModal}>
+            <MDBBtn color='elegant' onClick={this.closeModal}>
               Close
-            </Button>
+            </MDBBtn>
           </Modal.Footer>
         </Modal>
         <table className="table table-sm table-striped">
@@ -149,9 +149,9 @@ class MyStuffPage extends Component {
                     items: this.props.golfers,
                   }}
                 >
-                  <Button variant="primary" size="sm">
-                    Cards
-                  </Button>
+                  <MDBBtn color='danger' size="sm">
+                    Print
+                  </MDBBtn>
                 </Link>
               </th>
             </tr>
