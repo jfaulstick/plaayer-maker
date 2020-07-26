@@ -1,5 +1,19 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import {
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarNav,
+  MDBNavItem,
+  MDBNavLink,
+  MDBNavbarToggler,
+  MDBCollapse,
+  MDBFormInline,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+} from "mdbreact";
 
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
@@ -75,33 +89,40 @@ class App extends Component {
     return (
       <Router>
         <div className="App">
-          <Navbar bg="dark" expand="lg" variant="dark">
-            <Navbar.Brand href="#home">PLAAYer Maker</Navbar.Brand>
-            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-            <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="mr-auto">
-                <Link className="nav-link" to="/">
-                  Home
-                </Link>
-                <NavDropdown title="Create" id="basic-nav-dropdown">
-                  <Link className="dropdown-item" to="/create/hmg">
-                    History Maker Golf
-                  </Link>
-                  {/* <Link className="dropdown-item" to="/create/hmb" disabled>
-                    History Maker Baseball
-                  </Link> */}
-                </NavDropdown>
-                <NavDropdown title="My Stuff" id="basic-nav-dropdown">
-                  <Link className="dropdown-item" to="/mystuff/hmg">
-                    History Maker Golf
-                  </Link>
-                  {/* <Link className="dropdown-item" to="/create/hmb" disabled>
-                    History Maker Baseball
-                  </Link> */}
-                </NavDropdown>
-              </Nav>
-            </Navbar.Collapse>
-          </Navbar>
+          <MDBNavbar color="unique-color-dark" dark expand="md">
+            <MDBNavbarBrand>
+              <strong className="white-text">PLAAYer Maker</strong>
+            </MDBNavbarBrand>
+            <MDBNavbarToggler onClick={this.toggleCollapse} />
+            <MDBCollapse id="navbarCollapse3" isOpen={this.state.isOpen} navbar>
+              <MDBNavbarNav left>
+                <MDBNavItem>
+                  <MDBNavLink to="/">Home</MDBNavLink>
+                </MDBNavItem>
+                <MDBNavItem>
+                  <MDBDropdown>
+                    <MDBDropdownToggle nav caret>
+                      <span className="mr-2">Create</span>
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu right>
+                      <MDBDropdownItem href="/create/hmg">History Maker Golf</MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+                </MDBNavItem>
+                <MDBNavItem>
+                  <MDBDropdown>
+                    <MDBDropdownToggle nav caret>
+                      <span className="mr-2">My Stuff</span>
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu>
+                      <MDBDropdownItem href="/mystuff/hmg">History Maker Golf</MDBDropdownItem>
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+                </MDBNavItem>
+              </MDBNavbarNav>
+            </MDBCollapse>
+          </MDBNavbar>
+
           <div className="d-flex justify-content-center">
             <AlertBox
               alert={this.state.alert}

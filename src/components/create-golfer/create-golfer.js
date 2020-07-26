@@ -1,4 +1,10 @@
 import React from "react";
+import {
+  MDBBtn,
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+} from "mdbreact";
 import { useForm } from "react-hook-form";
 
 import CardGolfer from "../card-golfer/card-golfer";
@@ -83,459 +89,132 @@ const CreateGolfer = (props) => {
     localStorage.setItem("golfers", JSON.stringify(props.golfers));
     resetForm();
     console.log(props);
-    props.showAlert('success', `New golfer ${data.nameFirst} ${data.nameLast} saved to local storage.`);
+    props.showAlert(
+      "success",
+      `New golfer ${data.nameFirst} ${data.nameLast} saved to local storage.`
+    );
   };
 
   return (
     <div className="container-md d-flex flex-column flex-md-row justify-content-center align-items-center">
       <div className="col-md-8">
-        <form
-          className="create-golfer-form card"
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <div className="form-group card-body">
-            <div className="row mt-2 d-flex justify-content-center">
-              <label className="skills-label">Information</label>
-            </div>
-            <div className="row form-row">
-              {/* register your input into the hook by invoking the "register" function */}
-              <div className="col-md-4">
-                <input
-                  name="nameFirst"
-                  className="form-control"
-                  placeholder="First Name"
-                  ref={register({ required: true })}
-                />
-                {errors.nameFirst && (
-                  <span className="text-danger">A first name is required</span>
-                )}
+        <MDBCard>
+          <form
+            className="create-golfer-form "
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <MDBCardBody>
+              <div className="row mt-2 d-flex justify-content-center">
+                <MDBCardTitle>Information</MDBCardTitle>
               </div>
-              <div className="col-md-4">
-                <input
-                  name="nameLast"
-                  className="form-control"
-                  placeholder="Last Name"
-                  ref={register({ required: true })}
-                />
-                {errors.nameFirst && (
-                  <span className="text-danger">A last name is required</span>
-                )}
-              </div>
-              <div className="col-md-4">
-                <input
-                  name="tour"
-                  className="form-control"
-                  placeholder="Tour Name"
-                  ref={register()}
-                />
-              </div>
-            </div>
-            <div className="row form-row">
-              <div className="col-md-6">
-                <select
-                  className="form-control form-control-sm"
-                  name="tournamentNumber"
-                  ref={register({ required: true })}
-                >
-                  <option value={1}>Tournament Rating 1</option>
-                  <option value={2}>Tournament Rating 2</option>
-                  <option value={3}>Tournament Rating 3</option>
-                  <option value={4}>Tournament Rating 4</option>
-                  <option value={5}>Tournament Rating 5</option>
-                  <option value={6}>Tournament Rating 6</option>
-                  <option value={7}>Tournament Rating 7</option>
-                  <option value={8}>Tournament Rating 8</option>
-                </select>
-                {errors.nameFirst && (
-                  <span className="text-danger">
-                    A tournament rating number is required
-                  </span>
-                )}
-              </div>
-              <div className="col-md-6">
-                <select
-                  className="form-control form-control-sm"
-                  name="tournamentGrade"
-                  ref={register({ required: true })}
-                >
-                  <option value={"A"}>Grade A</option>
-                  <option value={"B"}>Grade B</option>
-                  <option value={"C"}>Grade C</option>
-                </select>
-                {errors.nameFirst && (
-                  <span className="text-danger">
-                    A tournament rating grade is required
-                  </span>
-                )}
-              </div>
-            </div>
-            <div className="row mt-2 d-flex justify-content-center">
-              <label className="skills-label">Skills</label>
-            </div>
-            <div className="row mt-1 d-flex justify-content-center">
-              <div className="col-md-4 col-sm-12 text-left">
-                <div className="row text-left">
-                  <div className="skill-select-label">Puny</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.puny"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
+              <div className="row form-row">
+                {/* register your input into the hook by invoking the "register" function */}
+                <div className="col-md-4">
+                  <input
+                    name="nameFirst"
+                    className="form-control"
+                    placeholder="First Name"
+                    ref={register({ required: true })}
+                  />
+                  {errors.nameFirst && (
+                    <span className="text-danger">
+                      A first name is required
+                    </span>
+                  )}
                 </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Bomber</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.bomber"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
+                <div className="col-md-4">
+                  <input
+                    name="nameLast"
+                    className="form-control"
+                    placeholder="Last Name"
+                    ref={register({ required: true })}
+                  />
+                  {errors.nameFirst && (
+                    <span className="text-danger">A last name is required</span>
+                  )}
                 </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Legend</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.legend"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">King</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.king"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Yeoman</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.yeoman"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Duffer</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.duffer"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Shaper</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.shaper"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Scatter</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.scatter"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Champion</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.champion"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
+                <div className="col-md-4">
+                  <input
+                    name="tour"
+                    className="form-control"
+                    placeholder="Tour Name"
+                    ref={register()}
+                  />
                 </div>
               </div>
-              <div className="col-md-4 col-sm-12 text-left">
-                <div className="row text-left">
-                  <div className="skill-select-label">Hero</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.hero"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
+              <div className="row form-row">
+                <div className="col-md-6">
+                  <select
+                    className="form-control form-control-sm"
+                    name="tournamentNumber"
+                    ref={register({ required: true })}
+                  >
+                    <option value={1}>Tournament Rating 1</option>
+                    <option value={2}>Tournament Rating 2</option>
+                    <option value={3}>Tournament Rating 3</option>
+                    <option value={4}>Tournament Rating 4</option>
+                    <option value={5}>Tournament Rating 5</option>
+                    <option value={6}>Tournament Rating 6</option>
+                    <option value={7}>Tournament Rating 7</option>
+                    <option value={8}>Tournament Rating 8</option>
+                  </select>
+                  {errors.nameFirst && (
+                    <span className="text-danger">
+                      A tournament rating number is required
+                    </span>
+                  )}
                 </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Utility</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.utility"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Hacker</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.hacker"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Laser</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.laser"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Soft</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.soft"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Stone</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.stone"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Master</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.master"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Workman</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.workman"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
+                <div className="col-md-6">
+                  <select
+                    className="form-control form-control-sm"
+                    name="tournamentGrade"
+                    ref={register({ required: true })}
+                  >
+                    <option value={"A"}>Grade A</option>
+                    <option value={"B"}>Grade B</option>
+                    <option value={"C"}>Grade C</option>
+                  </select>
+                  {errors.nameFirst && (
+                    <span className="text-danger">
+                      A tournament rating grade is required
+                    </span>
+                  )}
                 </div>
               </div>
-              <div className="col-md-4 col-sm-12 text-left">
-                <div className="row text-left">
-                  <div className="skill-select-label">Sandy</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.sandy"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Chunky</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.chunky"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Gold</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.gold"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Rust</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.rust"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Icon</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.icon"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Prospect</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.prospect"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Dynamic</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.dynamic"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
-                <div className="row text-left">
-                  <div className="skill-select-label">Gilded</div>
-                  <div className="skill-select">
-                    <select
-                      className="form-control form-control-sm"
-                      name="skills.gilded"
-                      ref={register}
-                    >
-                      <option value={"no"}>No</option>
-                      <option value={"semi"}>Semi</option>
-                      <option value={"yes"}>Yes</option>
-                    </select>
-                  </div>
-                </div>
+              <div className="row mt-2 d-flex justify-content-center">
+                <MDBCardTitle>Skills</MDBCardTitle>
               </div>
-            </div>
+              <div className="row mt-1 d-flex justify-content-center">
+                {Object.keys(golfer.skills).map((skill) => {
+                  return (
+                    <div className="col-md-4 text-left">
+                      <div className="d-flex">
+                        <div className="skill-select-label">{skill.toUpperCase()}</div>
+                        <div className="skill-select">
+                          <select
+                            className="form-control form-control-sm"
+                            name={`skills.${skill}`}
+                            ref={register}
+                          >
+                            <option value={"no"}>No</option>
+                            <option value={"semi"}>Semi</option>
+                            <option value={"yes"}>Yes</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
 
-            <div className="row justify-content-center mt-3">
-              <input className="btn btn-primary mr-2" type="submit" />
-            </div>
-          </div>
-        </form>
+              <div className="row justify-content-center mt-3">
+                <MDBBtn color="elegant" type="submit">
+                  Submit
+                </MDBBtn>
+              </div>
+            </MDBCardBody>
+          </form>
+        </MDBCard>
       </div>
       <div className="col-md-4">
         <CardGolfer golfer={golfer} />

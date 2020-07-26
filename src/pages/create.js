@@ -1,5 +1,12 @@
 import React, { Component } from "react";
 
+import {
+  MDBFreeBird,
+  MDBRow,
+  MDBContainer,
+  MDBEdgeHeader,
+} from "mdbreact";
+
 import Page from "../components/page/page";
 import SelectCard from "../components/select-card/select-card";
 import CreateGolfer from "../components/create-golfer/create-golfer";
@@ -14,78 +21,40 @@ class CreatePage extends Component {
     };
   }
 
-  componentWillMount() {
-    
-  }
+  componentWillMount() {}
 
   componentDidMount() {
-    console.log('Create Page Mounted', this);
+    console.log("Create Page Mounted", this);
   }
 
   cardClick = (mode) => {
     this.setState({ mode: mode.toLowerCase() });
   };
 
-  SelectMode = () => {
-    return (
-      <Page>
-        {/* <SelectCard
-          type={"Course"}
-          imgUrl="/assets/img/pinflag.jpg"
-          clickEvent={this.cardClick}
-        /> */}
-        <SelectCard
-          type={"Golfer"}
-          imgUrl="./assets/img/golfer.png"
-          clickEvent={this.cardClick}
-        />
-      </Page>
-    );
-  };
-
   render = () => {
     switch (this.state.mode) {
       case "golfer":
         return (
-          <Page>
-            <CreateGolfer golfers={this.props.golfers} showAlert={this.props.showAlert}/>
-          </Page>
-        );
-      case "course":
-        return (
-          <Page>
-            <div>Creating a Course!</div>
-          </Page>
-        );
-      case "unset":
-        return (
-          <Page>
-            {/* <SelectCard
-              type={"Course"}
-              imgUrl="/assets/img/pinflag.jpg"
-              clickEvent={this.cardClick}
-            /> */}
-            <SelectCard
-              type={"Golfer"}
-              imgUrl="./assets/img/golfer.png"
-              clickEvent={this.cardClick}
-            />
-          </Page>
+          <MDBContainer className="p-0" fluid>
+            <MDBEdgeHeader color="mdb-color darken-2"></MDBEdgeHeader>
+            <MDBFreeBird>
+              <CreateGolfer
+                golfers={this.props.golfers}
+                showAlert={this.props.showAlert}
+              />
+            </MDBFreeBird>
+          </MDBContainer>
         );
       default:
         return (
-          <Page>
-            {/* <SelectCard
-              type={"Course"}
-              imgUrl="/assets/img/pinflag.jpg"
-              clickEvent={this.cardClick}
-            /> */}
-            <SelectCard
-              type={"Golfer"}
-              imgUrl="./assets/img/golfer.png"
-              clickEvent={this.cardClick}
-            />
-          </Page>
+          <MDBContainer className="p-0" fluid>
+            <MDBEdgeHeader color="mdb-color darken-2"></MDBEdgeHeader>
+            <MDBFreeBird>
+              <MDBRow className="d-flex justify-content-center">
+                <SelectCard type={"Golfer"} clickEvent={this.cardClick} />
+              </MDBRow>
+            </MDBFreeBird>
+          </MDBContainer>
         );
     }
   };
