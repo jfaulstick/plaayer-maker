@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { MDBDataTable } from "mdbreact";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -15,10 +16,33 @@ class MyStuffPage extends Component {
       golfers: this.props.golfers,
       modalTarget: {},
       showModal: false,
+      data: {
+        columns: [
+          { label: "First", field: "nameFirst", sort: "asc", width: 150 },
+          { label: "Last", field: "nameLast", sort: "asc", width: 150 },
+          { label: "Tour", field: "tour", sort: "asc", width: 150 },
+          {
+            label: "Tournament Number",
+            field: "tournamentNumber",
+            sort: "asc",
+            width: 150,
+          },
+          {
+            label: "Tournament 1Letter",
+            field: "tournamentGrade",
+            sort: "asc",
+            width: 150,
+          },
+        ],
+        rows: this.props.golfers,
+      },
     };
 
     this.closeModal = this.closeModal.bind(this);
+    console.log("this.state", this.state);
   }
+
+  componentDidMount() {}
 
   showModal() {
     this.setState({ showModal: true });
@@ -70,6 +94,18 @@ class MyStuffPage extends Component {
   }
 
   render() {
+    // return (
+    //   <MDBDataTable
+    //     striped
+    //     bordered
+    //     small
+    //     hover
+    //     data={this.state.data}
+    //     entriesOptions={[10, 25, 50, 100]}
+    //     entries={10}
+    //     fullPagination
+    //   />
+    // );
     return (
       <div className="page container-fluid p-0">
         <Modal
