@@ -65,9 +65,8 @@ class App extends Component {
 
   fetchGolfers() {
     let storedGolfers = JSON.parse(localStorage.getItem("golfers"));
-    this.setGolfers(storedGolfers);
-    console.log("storedGolfers");
-    console.log(storedGolfers);
+    this.setGolfers(storedGolfers || []);
+    console.log("this.state.golfers", this.state.golfers);
   }
 
   deleteGolfer(item) {

@@ -12,6 +12,7 @@ import CardGolfer from "../card-golfer/card-golfer";
 import "./create-golfer.scss";
 
 const CreateGolfer = (props) => {
+  console.log(props);
   const { register, handleSubmit, watch, setValue, errors } = useForm();
 
   const golfer = {
