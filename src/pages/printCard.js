@@ -31,14 +31,19 @@ class PrintGolfers extends Component {
     }
   }
 
+  getPages = (items) => {
+    console.log(`Pages: ${Math.ceil(items / 18)}`);
+    return Math.ceil(items / 18);
+  }
+
   renderPages = () => {
     if (this.props.location && this.props.location.items) {
       const pages = [];
 
       for (let i = 0; i < this.state.pages; i++) {
-        const firstIndex = i * 18;
+        const firstIndex = i * 17;
         const lastIndex =
-          firstIndex + 17 < this.props.location.items.length - 1
+          firstIndex + 17 < this.props.location.items.length
             ? firstIndex + 17
             : this.props.location.items.length - 1;
 
