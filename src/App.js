@@ -35,7 +35,6 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log("Golfers set to", this.state.golfers);
   }
 
   showAlert(variant, message) {
@@ -56,18 +55,13 @@ class App extends Component {
   fetchGolfers() {
     let storedGolfers = JSON.parse(localStorage.getItem("golfers"));
     this.setGolfers(storedGolfers);
-    console.log("storedGolfers");
-    console.log(storedGolfers);
   }
 
   deleteGolfer(item) {
     const index = this.state.golfers.indexOf(item);
-    console.log(`Clicked deleteItem on item at index ${index}`);
     const golfers = this.state.golfers;
     golfers.splice(index, 1);
-    console.log(`Remaining golfers`, golfers);
     this.setState({ golfers: golfers });
-    console.log(`this.state.golfers`, this.state.golfers);
     localStorage.setItem("golfers", JSON.stringify(this.state.golfers));
   }
 

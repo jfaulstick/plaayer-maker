@@ -14,14 +14,6 @@ class CreatePage extends Component {
     };
   }
 
-  componentWillMount() {
-    
-  }
-
-  componentDidMount() {
-    console.log('Create Page Mounted', this);
-  }
-
   cardClick = (mode) => {
     this.setState({ mode: mode.toLowerCase() });
   };

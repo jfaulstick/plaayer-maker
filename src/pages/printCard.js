@@ -12,7 +12,6 @@ class PrintGolfers extends Component {
       rows: 0,
       pages: 0,
     };
-    console.log(this.props);
   }
 
   componentWillMount() {
@@ -21,14 +20,11 @@ class PrintGolfers extends Component {
         rows: Math.ceil(this.props.location.items.length / 6),
         pages: Math.ceil(this.props.location.items.length / 18),
       });
-      console.log(`Length is ${this.props.location.items.length}`);
-      console.log(
-        `Rows set to ${Math.ceil(this.props.location.items.length / 6)}`
-      );
-      console.log(
-        `Pages set to ${Math.ceil(this.props.location.items.length / 18)}`
-      );
     }
+  }
+
+  getPages = (items) => {
+    return Math.ceil(items / 18);
   }
 
   renderPages = () => {
@@ -36,9 +32,9 @@ class PrintGolfers extends Component {
       const pages = [];
 
       for (let i = 0; i < this.state.pages; i++) {
-        const firstIndex = i * 18;
+        const firstIndex = i * 17;
         const lastIndex =
-          firstIndex + 17 < this.props.location.items.length - 1
+          firstIndex + 17 < this.props.location.items.length
             ? firstIndex + 17
             : this.props.location.items.length - 1;
 
@@ -58,17 +54,12 @@ class PrintGolfers extends Component {
 
   renderRows = (first, last) => {
     if (this.props.location && this.props.location.items) {
-      console.log(`First: ${first}, Last: ${last}`);
-      console.log(`Total items should be ${last - first}`);
-      console.log(`Total rows should be ${Math.ceil((last - first) / 6)}`);
       const totalRows = Math.ceil((last - first) / 6);
       const rows = [];
 
       for (let i = 0; i < totalRows; i++) {
         const firstIndex = first + i * 6;
         const lastIndex = firstIndex + 5 < last ? firstIndex + 5 : last;
-
-        console.log(`Index range is ${firstIndex} - ${lastIndex}`);
 
         const items = [];
 
@@ -90,8 +81,6 @@ class PrintGolfers extends Component {
 
   render() {
     if (!this.props.location || !this.props.location.items) {
-      console.log("Redirecting");
-
       return <Redirect to="/" />;
     }
 
